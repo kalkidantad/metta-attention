@@ -181,10 +181,10 @@ class AgentObject:
         if self._code is None:
             print(f"Agent {self.name()} has no code to execute.")
             return
-
-        print(f"Running agent: {self.name()} from {self._code[:50]}...")  # Show first 50 chars of code
-        try:
-            results = self._metta.run(self._code)
-            print(f"Execution result for {self.name()}: {results}")
-        except Exception as e:
-            print(f"Error executing agent {self.name()}: {e}")
+        with self._lock:  # Ensures only one execution at a time
+            print(f"Running agent: {self.name()} from {self._code[:50]}...")  # Show first 50 chars of code
+            try:
+                results = self._metta.run(self._code)
+                print(f"Execution result for {self.name()}: {results}")
+            except Exception as e:
+                print(f"Error executing agent {self.name()}: {e}")
