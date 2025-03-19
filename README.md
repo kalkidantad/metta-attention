@@ -1,33 +1,4 @@
-# Economic Attention Networks (ECAN)
-
-- This repository contains MeTTa code for [attention](https://github.com/singnet/attention) codebase port/re-implementation.
-
-## Introduction
-
-- ECAN(Economic Attention Network) is a general term for the way that Attentional dynamics (centrally, the Competition for Attention) is carried out within OpenCogPrime.
-
-- Each Atom has an Attention Value attached to it. The process of updating these values is carried out according to nonlinear dynamical equations that are derived based on "artificial economics," utilizing two separate "currencies," one for `Short Term Importance (STI)` and one for `Long Term Importance (LTI)`.
-
-- One aspect of these equations is a form of `Hebbian Learning:` Atoms called `HebbianLinks` record which Atoms were habitually used together in the past, and when it occurred that Atom A's utilization appeared to play a role in causing Atom B's utilization. Then, these HebbianLinks are used to guide the flow of currency between Atoms: `B` gives `A` some money if `B` thinks that this money will help `A` to get used, and that this utilization will help `B` to get used.
-
-
-- Very roughly speaking, these dynamical equations play a similar role to that played by `activation-spreading` in Neural Network AI systems.
-
-## Running the Code
-
-- Make sure to install MeTTa `v0.2.1` following the instruction on the [hyperon-experimental](https://github.com/trueagi-io/hyperon-experimental) repository.
-- For windows users, an alternative way of running MeTTa can be using the [metta-run](https://github.com/iCog-Labs-Dev/metta-prebuilt-binary) binary.
-
-
-## Contributing 
-
-Before you start contributing to this repository, make sure to read the [CONTRIBUTING.md](https://github.com/iCog-Labs-Dev/metta-attention/blob/main/.github/CONTRIBUTING.md) file from our repository
-
-## References
-
-- Original [paper](https://www.researchgate.net/publication/239925326_Economic_Attention_Networks_Associative_Memory_and_Resource_Allocation_for_General_Intelligence)
-
-- [Economic attention allocation](https://wiki.opencog.org/w/Economic_attention_allocation_(Obsolete)) wiki page 
-
-- C++ implementation of [attention](https://github.com/singnet/attention) codebase
-
+Bug fixes and improvements
+1. In the main.py file located within the attention directory, I resolved the issue caused by an agent object and making the path absolute
+2. In the run-tests.py file located within the scripts directory, I made a significant enhancement to improve the test discovery process. Specifically, I modified the search mechanism to more effectively locate test files by updating the root directory path. Originally, the script used root = pathlib.Path("."), which limited the search to the current directory. I replaced this with root = pathlib.Path(".."), which shifts the search scope to the parent directory, enabling a recursive search for files matching the *-test.metta pattern.
+3. I implemented a threading lock in the agent_base module to ensure that only one thread can execute the critical section of the code at any given time. By initializing the thread lock in sceduler. This enhancement prevents potential race conditions and ensures thread safety by synchronizing access to shared resources.
